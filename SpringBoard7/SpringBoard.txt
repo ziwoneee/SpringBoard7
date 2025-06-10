@@ -24,7 +24,16 @@ Controller -> View -> Controller -> Service/ServiceImpl -> DAO/DAOImpl -> SQL(ma
 
 
 	* DB생성
-
+	
+	CREATE TABLE `springdb`.`tbl_board` (
+  `bno` INT NOT NULL AUTO_INCREMENT COMMENT '게시판의 글번호를 설정\nAI (자동으로 숫자를 증가시켜가면서 설정)',
+  `title` VARCHAR(200) NOT NULL COMMENT '제목',
+  `content` TEXT NULL COMMENT '내용',
+  `writer` VARCHAR(50) NOT NULL COMMENT '글쓴이',
+  `regdate` TIMESTAMP NOT NULL DEFAULT now() COMMENT '작성날짜',
+  `viewcnt` INT NULL DEFAULT 0 COMMENT '글 조회수(기본값은 0)',
+  PRIMARY KEY (`bno`))
+COMMENT = '게시판 정보를 저장하는 테이블';
 
 
 
