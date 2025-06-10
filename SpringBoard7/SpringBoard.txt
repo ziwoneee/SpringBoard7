@@ -1,0 +1,46 @@
+SpringBoard.txt
+
+프로젝트 개발 순서
+
+[SpringMVC]
+SQL(mapper) -> DAO/DAOImpl -> Service/ServiceImpl -> Controller -> View
+
+[SpringBoard]
+Controller -> View -> Controller -> Service/ServiceImpl -> DAO/DAOImpl -> SQL(mapper)
+
+
+	* Controller 준비
+	- 공통적인 URI경로 설정(컨트롤러를 구분 목적)
+	- 각 기능별 URI를 설정(+ 호출방식 GET/POST)
+	- 연결된 뷰페이지 처리(정보전달Model / 페이지이동 redirect)
+	
+	* Service 준비
+	- 컨트롤러와 DAO를 연결 기능을 설정
+
+	* DAO 준비
+	- DB 연결 정보 처리 설정(root-context.xml)
+	- Mysql에 데이터베이스/테이블 생성
+	- SQL 구문(mapper) 준비
+
+
+	* DB생성
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
