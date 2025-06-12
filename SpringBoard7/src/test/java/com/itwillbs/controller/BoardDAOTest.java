@@ -44,7 +44,7 @@ public class BoardDAOTest {
 		vo.setWriter("관리자");
 		vo.setContent("테스트 글입니다!");
 		
-		bDAo.boardRegist(vo);
+		bDAo.boardInsert(vo);
 	}
 	
 }

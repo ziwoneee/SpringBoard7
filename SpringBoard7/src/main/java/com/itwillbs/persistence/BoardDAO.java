@@ -11,7 +11,7 @@ public interface BoardDAO {
 	
 	// 게시판 글쓰기
 	//public void boardRegist(BoardVO vo) throws Exception;
-	public void boardRegist(BoardVO vo) throws Exception;
+	public void boardInsert(BoardVO vo) throws Exception;
 	
 
 }

@@ -28,7 +28,7 @@ public class BoardDAOImpl implements BoardDAO {
 	private static final String NAMESPACE="com.itwillbs.mapper.BoardMapper.";
 	
 	@Override
-	public void boardRegist(BoardVO vo) throws Exception {
+	public void boardInsert(BoardVO vo) throws Exception {
 		// 게시판 글 입력하는 SQL 구문을 실행
 		// 디비연결
 		// SQL 구문 & pstmt 객체
