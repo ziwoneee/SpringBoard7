@@ -42,7 +42,7 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	@Override
-	public List<BoardVO> boardListALL() throws Exception {
+	public List<BoardVO> boardListAll() throws Exception {
 		logger.info(" boardListtALL() 실행 ");
 		
 		List<BoardVO> boardList = bDao.boardListSelect();

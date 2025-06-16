@@ -15,7 +15,7 @@ public interface BoardService {
 	public void boardRegist(BoardVO vo) throws Exception;
 	
 	// 게시판 리스트(all)
-	public List<BoardVO> boardListALL() throws Exception;
+	public List<BoardVO> boardListAll() throws Exception;
 	
 }
 
