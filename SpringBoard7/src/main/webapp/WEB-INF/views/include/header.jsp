@@ -323,7 +323,7 @@
                 	 글쓰기 
                 	</a>
                	</li>
-                <li><a href="${pageContext.request.contextPath }/resources/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                <li><a href="/board/listALL"><i class="fa fa-circle-o"></i> 게시판 리스트 </a></li>
               </ul>
             </li>
             <li class="treeview">

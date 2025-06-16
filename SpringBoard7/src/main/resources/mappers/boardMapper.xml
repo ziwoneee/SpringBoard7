@@ -10,6 +10,26 @@
 		insert into tbl_board (title,content,writer)
 		values(#{title},#{content},#{writer})
 	</insert>
+	
+	
+	<!-- 게시판 리스트(all) -->
+	<select id="listALL" 
+			resultType="com.itwillbs.domain.BoardVO">
+		select * from tbl_board
+		order by bno desc
+	</select>
 
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
