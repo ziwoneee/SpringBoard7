@@ -33,7 +33,7 @@ public class BoardController {
 	
 	// 글쓰기 (정보 입력) / GET
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
-	public void boardRegistGET() {
+	public void boardRegistGET() throws Exception {
 		logger.info(" boardRegistGET() 실행 ");
 		logger.info(" /views/board/regist.jsp 페이지 이동 ");
 	}
@@ -57,7 +57,13 @@ public class BoardController {
 		return "redirect:/board/listAll";
 	}
 	
-	
+	// http://localhost:8088/board/listALL
+	// 게시판 리스트 (ALL)
+	@RequestMapping(value = "/listALL", method = RequestMethod.GET)
+	public void boardListAllGET() throws Exception {
+		logger.info(" boardListAllGET() 실행 ");
+		logger.info(" /views/board/listALL.jsp 페이지 연결");
+	}
 	
 	
 	
