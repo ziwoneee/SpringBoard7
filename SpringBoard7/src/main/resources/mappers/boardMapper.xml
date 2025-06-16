@@ -16,6 +16,7 @@
 	<select id="listALL" 
 			resultType="com.itwillbs.domain.BoardVO">
 		select * from tbl_board
+		order by bno desc
 	</select>
 
 
