@@ -6,6 +6,9 @@
 	
 	<div class="content">
 		<h1>/board/listALL.jsp</h1>
+	
+	<%-- ${boardList } --%>
+	<%-- ${result } --%>
 		
 	<div class="box">
             <div class="box-header with-border">
@@ -49,6 +52,28 @@
 	</div>
 
 
+	<script>
+	 	// jsp(java) -> JSTL/EL -> HTML -> JavaScript 순서 실행
+	 	
+		// el표현식의 값을 사용가능한가? yes
+				
+		// 사용자가 글쓰기를 한 경우	' 글쓰기 완료! ' 메세지(alert)출력
+		
+		// alert("${result}");		
+		var result = "${result}"
+		
+		if(result == "createOK") {
+			alert(" 글쓰기 완료! ");
+		} else {
+			
+		}
+	 	
+	 	
+	 	
+	 	
+	 	
+	 	
+	</script>
 
 
 
@@ -56,5 +81,4 @@
 
 
 
-	<%@ include file = "../include/footer.jsp" %>
-<!-- 템플릿 푸터 추가 -->
+<%@ include file = "../include/footer.jsp" %>
