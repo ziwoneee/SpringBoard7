@@ -18,5 +18,7 @@ public interface BoardDAO {
 	// 게시판 리스트(all)
 	public List<BoardVO> boardListSelect() throws Exception; 
 	
+	// 게시판 본문보기
+	public BoardVO boardSelect(int bno) throws Exception;
 
 }

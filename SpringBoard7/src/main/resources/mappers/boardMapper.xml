@@ -19,6 +19,11 @@
 		order by bno desc
 	</select>
 
+	<!-- 게시판 본문보기 -->
+	<select id="getBoard" resultType="BoardVO">
+		select * from tbl_board
+		where bno=#{bno}
+	</select>
 
 </mapper>
 
