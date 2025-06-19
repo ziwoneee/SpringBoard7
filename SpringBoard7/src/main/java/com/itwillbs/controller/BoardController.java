@@ -8,8 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
@@ -82,6 +84,26 @@ public class BoardController {
 		
 		logger.info(" /views/board/listALL.jsp 페이지 연결");
 	}
+	
+	// http://localhost:8088/board/read?bno=11
+	// 게시판 본문보기 /board/read		GET
+	// @RequestMapping(value = "/read", method = RequestMethod.GET)
+	@GetMapping(value = "/read")
+	public void boardReadGET(@RequestParam("bno") int bno) throws Exception {
+		logger.info(" boardReadGET() 실행");
+		
+		logger.info(" bno : {}", bno);
+		// 특정 글정보를 DB에서 가져와서 view 페이지에 출력
+		
+		// 서비스 -> DAO 특정 글정보 가져오기
+		
+		// Model 객체 사용
+		
+		// 연결된 뷰페이지에 /board/read.jsp 출력
+		
+		
+	}
+	
 	
 	
 	
