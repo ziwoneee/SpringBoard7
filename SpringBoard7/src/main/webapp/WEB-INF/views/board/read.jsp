@@ -25,7 +25,6 @@
             <!-- action="/board/regist" 생략가능
             	 생략시 자기자신의 주소를 호출
              -->
-            <form role="form"  method="post">
               <div class="box-body">
               
               	 <div class="form-group">
@@ -70,14 +69,34 @@
                  </div>
                 
                 
+               <!-- jQuery 사용 --> 
+               <!-- 1) jquery 소스코드를 추가 --> 
+               <!-- <script src="jQuery-2.1.4.min.js"></script> --> 
+               <!-- 2) jquery 소스코드 사용 --> 
+               <script type="text/javascript">
+               /* jquery : javascript에서 기능을 모아서 만든 것 */
+               		$(document).ready(function(){
+               			// => 문서가 준비된 경우 실행하는 동작
+               			// => 작성되는 코드 jquery
+               			$(".btn-danger").click(function(){
+               				alert(" 게시판 목록으로 이동합니다! ")
+               				// 게시판 목록으로 이동
+               				location.href="/board/listALL"
+               			}); // click
+               			
+               		}); // ready
+               
+               </script>
+                
                 
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">글쓰기</button>
+                <button type="submit" class="btn btn-danger btn-lg">목록</button>
               </div>
-            </form>
+            
           </div>
 
 	</div class="content">
