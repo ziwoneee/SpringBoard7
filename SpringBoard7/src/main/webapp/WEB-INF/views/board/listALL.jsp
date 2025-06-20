@@ -9,6 +9,7 @@
 	
 	<%-- ${boardList } --%>
 	<%-- ${result } --%>
+	<%-- ${updateCheck } --%>
 		
 	<div class="box">
             <div class="box-header with-border">
