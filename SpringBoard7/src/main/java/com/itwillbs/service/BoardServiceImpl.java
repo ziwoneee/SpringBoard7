@@ -53,13 +53,26 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
-
+	// 게시판 본문보기
 	@Override
 	public BoardVO getBoard(int bno) throws Exception {
 		logger.info(" getBoard(int bno) 실행 ");
 
 		return bDao.boardSelect(bno);
 	}
+
+
+	
+	// 게시판 조회수 1증가
+	@Override
+	public void increaseViewcnt(int bno) throws Exception {
+		logger.info(" increaseViewcnt(int bno) 실행 ");
+		
+		bDao.viewcntUpdate(bno);
+		
+	}
+	
+	
 	
 	
 	
