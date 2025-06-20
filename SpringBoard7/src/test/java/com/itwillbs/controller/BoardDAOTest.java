@@ -50,7 +50,7 @@ public class BoardDAOTest {
 	}
 	
 	// 게시판 리스트 (all) 동작테스트
-	@Test
+	//@Test
 	public void 게시판리스트_테스트() throws Exception {
 		
 		logger.info(" 게시판리스트_테스트() 실행 ");
@@ -60,6 +60,20 @@ public class BoardDAOTest {
 		logger.info("{}", boardList);
 	}
 	
+	//@Test
+	public void 게시판본문보기_테스트() throws Exception{
+		logger.info(" 게시판본문보기_테스트() 실행 ");
+		
+		int bno = 10;
+		bDAo.boardSelect(bno);
+		
+	}
+	
+	//@Test
+	public void 조회수1증가_테스트() throws Exception {
+		int bno = 2;
+		bDAo.viewcntUpdate(bno);
+	}
 	
 	
 	

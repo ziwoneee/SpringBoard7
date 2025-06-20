@@ -9,6 +9,7 @@
 	
 	<%-- ${boardList } --%>
 	<%-- ${result } --%>
+	<%-- ${updateCheck } --%>
 		
 	<div class="box">
             <div class="box-header with-border">
@@ -28,7 +29,11 @@
 			<c:forEach var="vo" items="${boardList }">
                 <tr>
                   <td>${vo.bno }</td>
-                  <td>${vo.title }</td>
+                  <td>
+                  	<a href="http://localhost:8088/board/read?bno=${vo.bno}">
+                  		${vo.title }
+                  	</a>		
+           		  </td>
                   <td>${vo.writer }</td>
                   <td><span class="badge bg-yellow">${vo.viewcnt }</span></td>
                 </tr>
