@@ -21,7 +21,6 @@ public interface BoardService {
 	public BoardVO getBoard(int bno) throws Exception;
 	
 	
-	
 }
 
 

@@ -64,6 +64,18 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return resultVO;
 	}
+
+	
+	// 게시판 글 조회수 1증가
+	@Override
+	public void viewcntUpdate(int bno) throws Exception {
+		logger.info(" viewcntUpdate(int bno) 실행 ");
+		
+		sqlSession.update(NAMESPACE + "increaseViewcnt", bno);
+		
+	}
+	
+	
 	
 	
 	
