@@ -24,7 +24,6 @@ public interface BoardDAO {
 	// 게시판 글 조회수 1증가
 	public void viewcntUpdate(int bno) throws Exception;
 	
-	
 	// 게시판 글 수정하기
 	public void boardModify(int bno) throws Exception;
 	
