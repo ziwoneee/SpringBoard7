@@ -71,6 +71,18 @@ public class BoardServiceImpl implements BoardService {
 		bDao.viewcntUpdate(bno);
 		
 	}
+
+
+	// 게시판 수정하기
+	@Override
+	public void modifyBoard(int bno) throws Exception {
+		logger.info(" modifyBoard(int bno) 실행 ");
+		
+		bDao.boardModify(bno);
+	}
+	
+	
+	
 	
 	
 	
