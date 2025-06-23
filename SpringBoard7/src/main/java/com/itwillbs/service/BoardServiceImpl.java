@@ -75,10 +75,12 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시판 수정하기
 	@Override
-	public void modifyBoard(int bno) throws Exception {
-		logger.info(" modifyBoard(int bno) 실행 ");
+	public void modifyBoard(BoardVO vo) throws Exception {
+		logger.info(" modifyBoard(BoardVO vo) 실행 ");
 		
-		bDao.boardModify(bno);
+		bDao.boardUpdate(vo);
+		
+		logger.info(" 게시판 수정 완료 ");
 	}
 	
 	

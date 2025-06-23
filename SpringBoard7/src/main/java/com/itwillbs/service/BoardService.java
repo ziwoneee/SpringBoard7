@@ -24,7 +24,7 @@ public interface BoardService {
 	public void increaseViewcnt(int bno) throws Exception;
 	
 	// 게시판 수정하기
-	public void modifyBoard(int bno) throws Exception;
+	public void modifyBoard(BoardVO vo) throws Exception;
 	
 }
 
