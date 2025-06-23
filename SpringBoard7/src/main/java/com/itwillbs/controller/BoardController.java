@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -127,6 +128,50 @@ public class BoardController {
 		
 		
 	}
+	
+	// http://localhost:8088/board/modify?bno=13
+	// 게시판 수정하기 GET
+	@RequestMapping(value="/modify", method = RequestMethod.GET)
+	public void boardModifyGET(@ModelAttribute("bno") int bno,
+								Model model) throws Exception {
+		logger.info(" boardModifyGET() 실행 ");
+		// 전달된 정보(파라메터)를 저장
+		logger.info(" bno : {}", bno);
+		
+		// 기존에 작성된 글의 내용을 확인하는 동작
+		
+		// 서비스 -> DAO 호출 글 정보를 가져오기
+		//BoardVO resultVO = bService.getBoard(bno);
+		//model.addAttribute(resultVO);
+		
+		model.addAttribute(bService.getBoard(bno));
+		
+		// 연결된 뷰페이지에 출력(/board/modify.jsp
+	}
+	
+	// 게시판 수정하기 POST
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String boardModifyPOST(BoardVO vo,
+								RedirectAttributes rttr) throws Exception {
+		logger.info(" boardModifyPOST() 실행 ");
+		
+		// 수정할 정보(전달된 데이터, 파라메터) 저장
+		logger.info(" vo : {}", vo);
+		
+		// 서비스 -> DB에 정보 호출
+		bService.modifyBoard(vo);
+		logger.info(" 게시판 글 수정 완료! ");
+		
+		// 리스트에 수정 완료했다는 정보를 전달해서
+		// 화면에 alert 출력
+		
+		rttr.addFlashAttribute("result", "modifyOK");
+
+		// 페이지 이동
+		
+		return "redirect:/board/listALL";
+	}
+	
 	
 	
 	

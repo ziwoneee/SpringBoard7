@@ -76,7 +76,17 @@ public class BoardDAOTest {
 	}
 	
 	
-	
+	@Test
+	public void 수정테스트() throws Exception {
+		BoardVO vo = new BoardVO();
+		
+		vo.setBno(1);
+		vo.setTitle("수정된 제목");
+		vo.setContent("수정된 내용");
+		vo.setWriter("수정된 이름");
+		
+		bDAo.boardUpdate(vo);
+	}
 	
 	
 	

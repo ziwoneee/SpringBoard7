@@ -69,8 +69,9 @@
 		
 		if(result == "createOK") {
 			alert(" 글쓰기 완료! ");
-		} else {
-			
+		}
+		if(result == "modifyOK") {
+			alert(" 글 수정 완료!")
 		}
 	 	
 	 	
