@@ -78,10 +78,11 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// 게시판 글 수정하기
 	@Override
-	public void boardModify(int bno) throws Exception {
-		logger.info(" boardModify(int bno) 실행 ");
+	public void boardUpdate(BoardVO vo) throws Exception {
+		logger.info(" boardUpdate(BoardVO vo) 실행 ");
 		
-		sqlSession.update(NAMESPACE + "boardMofify", bno);
+		// sql 구문 호출
+		sqlSession.update(NAMESPACE + "boardUpdate", vo);
 	}
 	
 	
