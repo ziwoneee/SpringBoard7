@@ -173,6 +173,15 @@ public class BoardController {
 	}
 	
 	
+	// 게시판 삭제하기 POST
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public String boardRemovePOST() {
+		logger.info(" boardRemovePOST() 실행 ");
+		
+		return "";
+	}
+	
+	
 	
 	
 	
