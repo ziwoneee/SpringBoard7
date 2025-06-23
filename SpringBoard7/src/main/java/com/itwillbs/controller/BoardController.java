@@ -151,18 +151,25 @@ public class BoardController {
 	
 	// 게시판 수정하기 POST
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String boardModifyPOST(BoardVO vo) throws Exception {
+	public String boardModifyPOST(BoardVO vo,
+								RedirectAttributes rttr) throws Exception {
 		logger.info(" boardModifyPOST() 실행 ");
 		
 		// 수정할 정보(전달된 데이터, 파라메터) 저장
 		logger.info(" vo : {}", vo);
 		
 		// 서비스 -> DB에 정보 호출
+		bService.modifyBoard(vo);
+		logger.info(" 게시판 글 수정 완료! ");
 		
+		// 리스트에 수정 완료했다는 정보를 전달해서
+		// 화면에 alert 출력
+		
+		rttr.addFlashAttribute("result", "modifyOK");
 
 		// 페이지 이동
 		
-		return "";
+		return "redirect:/board/listALL";
 	}
 	
 	
