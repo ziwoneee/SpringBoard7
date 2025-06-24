@@ -42,6 +42,13 @@
 	</update>
 	
 	
+	<!-- 게시판 글 정보 삭제 -->
+	<delete id="boardDelete">
+		delete from tbl_board
+		where bno = #{bno}
+	</delete>
+	
+	
 
 </mapper>
 

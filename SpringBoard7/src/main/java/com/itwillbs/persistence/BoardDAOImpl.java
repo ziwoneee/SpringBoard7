@@ -84,6 +84,19 @@ public class BoardDAOImpl implements BoardDAO {
 		// sql 구문 호출
 		sqlSession.update(NAMESPACE + "boardUpdate", vo);
 	}
+
+	
+	
+	// 게시판 글 삭제하기
+	@Override
+	public int boardDelete(int bno) throws Exception {
+		logger.info(" boardDelete(int bno) 실행 ");
+		
+		// 정상처리 1, 비정상 처리 0
+		int result = sqlSession.delete(NAMESPACE + "boardDelete", bno); 
+		return result;
+		
+	}
 	
 	
 	

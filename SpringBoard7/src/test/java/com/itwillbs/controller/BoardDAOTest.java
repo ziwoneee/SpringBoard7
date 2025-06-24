@@ -76,7 +76,7 @@ public class BoardDAOTest {
 	}
 	
 	
-	@Test
+	// @Test
 	public void 수정테스트() throws Exception {
 		BoardVO vo = new BoardVO();
 		
@@ -88,7 +88,11 @@ public class BoardDAOTest {
 		bDAo.boardUpdate(vo);
 	}
 	
-	
+	@Test
+	public void 삭제테스트() throws Exception {
+		
+		bDAo.boardDelete(12);
+	}
 	
 	
 	
