@@ -106,8 +106,8 @@
                				// 글번호를 가지고 삭제 처리
                				// /board/remove 주소 호출
                				form.attr("action", "/board/remove")
+               				form.attr("method", "POST")
                				form.submit();
-               			
                			});
                			
                			

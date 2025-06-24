@@ -26,6 +26,11 @@ public interface BoardService {
 	// 게시판 수정하기
 	public void modifyBoard(BoardVO vo) throws Exception;
 	
+	// 게시판 글 삭제하기
+	public int removeBoard(int bno) throws Exception;
+	
+
+	
 }
 
 

@@ -90,11 +90,8 @@ public class BoardDAOTest {
 	
 	@Test
 	public void 삭제테스트() throws Exception {
-		BoardVO vo = new BoardVO();
 		
-		vo.setBno(2);
-		
-		bDAo.boardDelte(vo);
+		bDAo.boardDelete(12);
 	}
 	
 	

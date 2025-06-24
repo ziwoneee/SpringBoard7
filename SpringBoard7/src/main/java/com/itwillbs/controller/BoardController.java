@@ -172,16 +172,29 @@ public class BoardController {
 		return "redirect:/board/listALL";
 	}
 	
-	
+	// http://localhost:8088/board/remove (POST)
 	// 게시판 삭제하기 POST
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public String boardRemovePOST() {
+	public String boardRemovePOST(@ModelAttribute("bno") int bno,
+								 RedirectAttributes rttr) throws Exception {
 		logger.info(" boardRemovePOST() 실행 ");
 		
-		return "";
+		// 수정할 정보(전달된 데이터, 파라메터) 저장
+		logger.info(" bno : {}" + bno);
+		
+		// 서비스 -> DB에 정보 호출
+		bService.removeBoard(bno);
+		logger.info(" 게시판 글 삭제 완료! ");
+		
+		// 리스트에 수정 완료했다는 정보를 전달해서
+		// 화면에 alert 출력
+		
+		rttr.addFlashAttribute("result", "deleteOK");
+
+		// 페이지 이동
+		
+		return "redirect:/board/listALL";
 	}
-	
-	
 	
 	
 	
