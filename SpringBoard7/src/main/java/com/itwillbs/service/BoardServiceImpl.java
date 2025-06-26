@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.persistence.BoardDAO;
 
 /**
@@ -52,6 +53,15 @@ public class BoardServiceImpl implements BoardService {
 		return boardList;
 		
 	}
+	
+	
+
+	@Override
+	public List<BoardVO> boardListCri(Criteria cri) throws Exception {
+		logger.info(" boardListCri(Criteria cri) 호출");
+		return bDao.boardListCriSelect(cri);
+	}
+
 
 	// 게시판 본문보기
 	@Override

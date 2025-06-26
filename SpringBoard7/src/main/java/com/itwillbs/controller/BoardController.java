@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.service.BoardService;
 
 // @RequestMapping(value = "/board/*")
@@ -90,6 +91,35 @@ public class BoardController {
 		
 		logger.info(" /views/board/listALL.jsp 페이지 연결");
 	}
+	
+	// http://localhost:8088/board/listCri	기본값 호출(1,10)
+	// http://localhost:8088/board/listCri?page=2
+	// http://localhost:8088/board/listCri?pageSize=20
+	// http://localhost:8088/board/listCri?page=2&pageSize=20
+	// 게시판 리스트 (Cri)
+	@RequestMapping(value = "/listCri", method = RequestMethod.GET)
+	public void boardListCriGET(Model model,
+			HttpSession session,
+			Criteria cri) throws Exception {
+		logger.info(" boardListCriGET() 실행 ");
+		
+		// 서비스 -> DAO 호출 -> DB 조회
+		// List<BoardVO> boardList = bService.boardListAll();
+		// Criteria cri = new Criteria();
+		// cri.setPage(1);
+		// cri.setPageSize(10);
+		
+		List<BoardVO> boardList = bService.boardListCri(cri);
+		
+		// 세션사용해서 정보를 저장
+		session.setAttribute("updateCheck", true);
+		
+		// 컨트롤러 -> 뷰페이지로 전달 (Model)
+		model.addAttribute("boardList", boardList);
+		
+		logger.info(" /views/board/listALL.jsp 페이지 연결");
+	}
+	
 	
 	// http://localhost:8088/board/read?bno=8
 	// 게시판 본문보기 /board/read		GET

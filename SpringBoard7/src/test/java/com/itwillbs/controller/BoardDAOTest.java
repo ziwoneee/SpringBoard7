@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.persistence.BoardDAO;
 
 /*root-context.xml에서 설정한 DB연결정보 테스트 */
@@ -58,6 +59,24 @@ public class BoardDAOTest {
 			= bDAo.boardListSelect();
 		
 		logger.info("{}", boardList);
+	}
+	
+	@Test
+	public void 게시판리스트_페이징처리_테스트() throws Exception {
+		
+		// List boardList = bDAo.boardListPageSelect(0);
+		
+		// int page = 1;
+		// List boardList = bDAo.boardListPageSelect(page);
+		
+		Criteria cri = new Criteria();
+		cri.setPage(1);
+		cri.setPageSize(10);
+		
+		List boardList = bDAo.boardListCriSelect(cri);
+		
+		logger.info(" boardList : " + boardList.size());
+		logger.info("" + boardList);
 	}
 	
 	//@Test
