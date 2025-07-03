@@ -100,6 +100,73 @@ COMMENT = '게시판 정보를 저장하는 테이블';
 		
 		}
 
+위 필기 가져오기
+------------------------------------------------------------------------------------
+  * 페이지 블럭 
+    - 끝 페이지 번호 (endPage)
+    
+      [ endPage = (int) Math.ceil(페이지번호/(double)페이지사이즈) * 페이지 사이즈 ]
+    
+	- 시작 페이지 번호 (startPage)
+	
+	  [ startPage = (endPage - 페이지사이즈) + 1 ]
+	
+	- 전체 데이터 개수 (totalCount)
+	  => end 페이지 값을 재계산 ( 페이지에 글이 모두 없을 수 있기 때문 )
+	  
+	  [ tmpEndPage = (int) Math.ceil(totalCount/(double)페이지 사이즈)
+	  [ if( endPage > tmpEndPage) endPage = tmpEndPage; ]
+	  
+	- 이전 페이지 (prev) - boolean
+	
+	  [ prev = startPage == 1? false : true]	
+	  [ prev = startPage != 1 ]
+	
+	- 다음 페이지 (next) - boolean
+	
+	  [ next = endPage * 페이지사이즈 >= totalCount false : true]
+	  [ next = endPage * 페이지사이즈 < totalCount ]
+
+  ex) 한 페이지에 10개씩 출력, 총 글 122개, 페이지 블럭의 크기: 10개
+  	  -> 총 페이지 수 12.2개 => 13개
+  	 1) 3page 글 리스트
+  	   startPage = 1, endPage = 10, prev = X, next = O 
+	 2) 10page 글 리스트
+	   startPage = 1, endPage = 10, prev = X, next = O 
+	 3) 11페이지 글 리스트
+	   startPage = 11, endPage = 20 -> 13, prev = O, next = X 
+
+--------------------------------------------------------------------------------------------------
+
+	의존 객체 자동주입(Automatic Dependency Injection)
+	=> 스프링 설정파일(root-context.xml/servlet-context.xml) 태그를 사용해서
+	  의존 객체대상을 명시하지 않고 스프링 컨테이너가 자동으로 객체 주입해주는 것
+	  
+	  1) @Inject : Java에서 지원하는 어노테이션 (특정 프레임워크에 비종속적)
+	  
+	  	 찾는순서
+	  	 [ 타입 -> @Qualifier -> 이름 -> 실패 ]
+	  	 
+	  	 사용범위
+	  	 멤버변수, set(), 생성자, 일반메서드
+	  	 
+	  2) @Autowired : Spring에서 지원하는 어노테이션 (스프링에서만 사용 가능)
+	  
+	     찾는순서
+	     [ 타입 -> 이름 -> @Qualifier -> 실패 ]
+	     
+	     사용범위
+	     멤버변수, set(), 생성자, 일반메서드
+
+
+
+
+
+
+
+
+
+
 
 
 
