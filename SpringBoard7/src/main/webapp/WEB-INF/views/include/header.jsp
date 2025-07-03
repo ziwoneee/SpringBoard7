@@ -323,7 +323,7 @@
                 	 글쓰기 
                 	</a>
                	</li>
-                <li><a href="/board/listALL"><i class="fa fa-circle-o"></i> 게시판 리스트 </a></li>
+                <li><a href="/board/listCri"><i class="fa fa-circle-o"></i> 게시판 리스트 </a></li>
               </ul>
             </li>
             <li class="treeview">

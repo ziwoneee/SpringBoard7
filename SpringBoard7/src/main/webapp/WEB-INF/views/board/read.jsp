@@ -86,7 +86,7 @@
                			$(".btn-danger").click(function(){
                				alert(" 게시판 목록으로 이동합니다! ")
                				// 게시판 목록으로 이동
-               				location.href="/board/listALL"
+               				location.href="/board/listCri"
                			}); // click
                			
                			var form = $("form[role='form']")
