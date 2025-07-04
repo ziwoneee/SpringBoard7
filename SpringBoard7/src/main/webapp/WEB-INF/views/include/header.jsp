@@ -28,7 +28,7 @@
     
   </head>
       <!-- jQuery 2.1.4 -->
-    <script src="${pageContext.request.contextPath }/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+  <script src="${pageContext.request.contextPath }/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
   <body class="skin-blue sidebar-mini">
     <div class="wrapper">
       
@@ -65,7 +65,7 @@
                       <li><!-- start message -->
                         <a href="#">
                           <div class="pull-left">
-                            <img src="${pageContext.request.contextPath }/resources/dist/img/user7-128x128.jpg" class="img-circle" alt="User Image"/>
+                            <img src="/resources/dist/img/user7-128x128.jpg" class="img-circle" alt="User Image"/>
                           </div>
                           <h4>
                             Support Team
@@ -77,7 +77,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="${pageContext.request.contextPath }/resources/dist/img/user3-128x128.jpg" class="img-circle" alt="user image"/>
+                            <img src="./resources/dist/img/user3-128x128.jpg" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             AdminLTE Design Team
@@ -248,7 +248,7 @@
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="${pageContext.request.contextPath }/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <img src="./resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
                       Alexander Pierce - Web Developer
                       <small>Member since Nov. 2012</small>
@@ -318,12 +318,14 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/board/regist">
-                	<i class="fa fa-circle-o"></i>
-                	 글쓰기 
-                	</a>
-               	</li>
-                <li><a href="/board/listALL"><i class="fa fa-circle-o"></i> 게시판 리스트 </a></li>
+                <li>
+                	<a href="/board/regist">
+                    	<i class="fa fa-circle-o"></i>
+                    	 글쓰기 
+                    </a>
+                </li>
+                
+                <li><a href="/board/listCri"><i class="fa fa-circle-o"></i> 게시판 리스트 </a></li>
               </ul>
             </li>
             <li class="treeview">
