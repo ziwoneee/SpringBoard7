@@ -3,7 +3,7 @@ SpringBoard.txt
 프로젝트 개발 순서
 
 [SpringMVC]
-SQL(mapper) -> DAO/DAOImpl -> Service/ServiceImpl -> Controller -> View
+SQL(mapper) -> DAO/DAOImpl -> Service/ServiceImpl -> Controller -> View 
 
 [SpringBoard]
 Controller -> View -> Controller -> Service/ServiceImpl -> DAO/DAOImpl -> SQL(mapper)
@@ -14,70 +14,70 @@ Controller -> View -> Controller -> Service/ServiceImpl -> DAO/DAOImpl -> SQL(ma
 	- 각 기능별 URI를 설정(+ 호출방식 GET/POST)
 	- 연결된 뷰페이지 처리(정보전달Model / 페이지이동 redirect)
 	
-	* Service 준비
+	* Service 준비 
 	- 컨트롤러와 DAO를 연결 기능을 설정
-
+	
 	* DAO 준비
 	- DB 연결 정보 처리 설정(root-context.xml)
 	- Mysql에 데이터베이스/테이블 생성
 	- SQL 구문(mapper) 준비
-
-
+	
+	
 	* DB생성
 	
 	CREATE TABLE `springdb`.`tbl_board` (
   `bno` INT NOT NULL AUTO_INCREMENT COMMENT '게시판의 글번호를 설정\nAI (자동으로 숫자를 증가시켜가면서 설정)',
-  `title` VARCHAR(200) NOT NULL COMMENT '제목',
-  `content` TEXT NULL COMMENT '내용',
+  `title` VARCHAR(200) NOT NULL COMMENT '글 제목',
+  `content` TEXT NULL COMMENT '글 본문',
   `writer` VARCHAR(50) NOT NULL COMMENT '글쓴이',
-  `regdate` TIMESTAMP NOT NULL DEFAULT now() COMMENT '작성날짜',
-  `viewcnt` INT NULL DEFAULT 0 COMMENT '글 조회수(기본값은 0)',
+  `regdate` TIMESTAMP NOT NULL DEFAULT now() COMMENT '작성일 ',
+  `viewcnt` INT NULL DEFAULT 0 COMMENT '글 조회수 (기본값은 0)',
   PRIMARY KEY (`bno`))
-COMMENT = '게시판 정보를 저장하는 테이블';
-
-
+	COMMENT = '게시판 정보를 저장하는 테이블';
+	
+	
   * 게시판 만들기 프로젝트
   - 컨트롤러는 /board/* 로 매핑한다
-
-  - 기능정의 
-  * 동작에 따른 처리방식을 결정
-    GET 방식 : 조회 / 출력 / 입력 동작 수행시 
-    POST 방식 : 처리(등록, 수정, 삭제...) 동작 수행시
   
-  - 멤버 : 회원가입 -> 게시판 : 글쓰기
+  - 기능정의
+  * 동작에 따른 처리방식을 결정
+    GET 방식 : 조회 / 출력 / 입력  동작 수행시 
+    POST 방식 : 처리(등록,수정,삭제...) 동작 수행시
+    
+  - 맴버 : 회원가입 -> 게시판 : 글쓰기
   
   - 게시판 글쓰기
-    1) 사용자가 글정보를 입력하는 페이지 / GET / 주소 : /board/regist
-    2) 입력된 글정보를 처리하는 페이지 / POST / 주소 : /board/regist
-    
+  	1) 사용자가 글정보를 입력하는 페이지 / GET / 주소 : /board/regist
+  	2) 입력된 글정보를 처리하는 페이지 / POST / 주소 : /board/regist
+  	
   - 게시판 목록 보기(조회)
   	1) 컨트롤러에 리스트 출력하는 동작 페이지 생성
-
+  	 
   	2) 서비스 -> DB 데이터 가져오기
-
+  	
   	3) 연결된 뷰페이지에 출력(+ 템플릿)
   
   - 게시판 본문(내용)보기 
   - 게시판 내용 수정
   - 게시판 내용 삭제
   
-  ----------------------------------------------------------------------------------
+  ------------------------------------------------------------
   * 컨트롤러의 정보를 연결된 뷰페이지에 전달
   
-  Model 객체 (택배 기사님)
+  Model 객체 (택배아저씨) 
    : 스프링 제공 객체(컨트롤러의 데이터를 뷰페이지로 전달)
-    addAttribute("이름", 값); => 주소줄에 정보 전달 & 정보 유지
-  
-  RedirectAttirbute 객체 (쿠팡 기사님)
+    addAttribute("이름",값); => 주소줄에 정보 전달 & 정보 유지
+    
+  RedirectAttribute 객체 (쿠팡아저씨)
    : 스프링 제공 객체(컨트롤러의 데이터를 뷰페이지로 전달)
-      단, 페이지를 리다이렉트 이동 시 사용가능
+      단, 페이지를 리다이렉트 이동시 사용가능 
       
-    addAttribute("이름", 값); => 주소줄에 정보 전달 & 정보 유지
-    addFlashAttribute("이름", 값); => 주소줄에 정보 전달 X (세션에 저장)& 정보 유지 X
-    												(새로고침 시 사라짐)
-    
-    
-    @ModelAttribute("값이름") 저장할 변수
+    addAttribute("이름",값); => 주소줄에 정보 전달 & 정보 유지
+    addFlashAttribute("이름",값); => 주소줄에 정보 전달X(세션에 저장) & 정보 유지X
+                                                   (새로고침시 사라짐)
+  
+ -------------------------------------------------------------- 	
+  	@ModelAttribute("값이름") 저장할 변수
   		: 전달된 데이터(파라메터)를 저장방법
   		
   		영역객체.getAttribute(); 동작처럼 수행가능
@@ -95,68 +95,109 @@ COMMENT = '게시판 정보를 저장하는 테이블';
 		* 1:1 대응 관계 
 
 
-	예외처리
-		try {
-		
-		}
+예외처리
+	try{
+		예외가 발생할지도 모르는 코드
+	} catch(Exception e){
+		예외메세지 출력
+	} finally{
+	        예외발생여부와 상관없이 반드시 실행 코드
+	}
 
-위 필기 가져오기
-------------------------------------------------------------------------------------
+
+	 method() throws Exception
+	 => 예외처리를 직접 수행X, 대신 해당 메서드를 호출하는 시점에 예외처리를 수행하도록 설정
+
+
+
+-----------------------------------------------------------------------------------
   * 페이지 블럭 
-    - 끝 페이지 번호 (endPage)
-    
-      [ endPage = (int) Math.ceil(페이지번호/(double)페이지사이즈) * 페이지 사이즈 ]
-    
-	- 시작 페이지 번호 (startPage)
-	
-	  [ startPage = (endPage - 페이지사이즈) + 1 ]
-	
-	- 전체 데이터 개수 (totalCount)
-	  => end 페이지 값을 재계산 ( 페이지에 글이 모두 없을 수 있기 때문 )
-	  
-	  [ tmpEndPage = (int) Math.ceil(totalCount/(double)페이지 사이즈)
-	  [ if( endPage > tmpEndPage) endPage = tmpEndPage; ]
-	  
-	- 이전 페이지 (prev) - boolean
-	
-	  [ prev = startPage == 1? false : true]	
-	  [ prev = startPage != 1 ]
-	
-	- 다음 페이지 (next) - boolean
-	
-	  [ next = endPage * 페이지사이즈 >= totalCount false : true]
-	  [ next = endPage * 페이지사이즈 < totalCount ]
+ 	 - 끝 페이지 번호 (endPage)
+ 	   
+ 	    [ endPage =  (int) Math.ceil(페이지번호/(double)페이지사이즈)*페이지 사이즈 ]  
+ 	    
+     - 시작 페이지 번호 (startPage) 
+     
+     	[ startPage = (endPage - 페이지사이즈) + 1 ]
+     	 
+ 	 - 전체 데이터의 개수 (totalCount)
+ 	   =>  end페이지 값을 재계산 ( 페이지에 글이 모두 없을수 있기 때문 )
+ 	   
+ 	   [ tmpEndPage =  (int)Math.ceil(totalCount/(double)페이지사이즈) ]
+ 	   [ if( endPage > tmpEndPage)  endPage = tmpEndPage;  ]
+ 	    
+ 	 
+ 	 - 이전페이지 (prev) - boolean
+ 		 
+ 		 [ prev =  startPage == 1? false : true ]	 
+ 		 [ prev =  startPage != 1 ]	 
+  	 
+ 	 - 다음페이지 (next) - boolean
+ 	 
+ 	 	[ next = endPage * 페이지사이즈 >= totalCount? false : true ]
+ 	 	[ next = endPage * 페이지사이즈 < totalCount ]
+ 	 	
 
-  ex) 한 페이지에 10개씩 출력, 총 글 122개, 페이지 블럭의 크기: 10개
-  	  -> 총 페이지 수 12.2개 => 13개
-  	 1) 3page 글 리스트
-  	   startPage = 1, endPage = 10, prev = X, next = O 
-	 2) 10page 글 리스트
-	   startPage = 1, endPage = 10, prev = X, next = O 
-	 3) 11페이지 글 리스트
-	   startPage = 11, endPage = 20 -> 13, prev = O, next = X 
 
---------------------------------------------------------------------------------------------------
+  ex) 한 페이지에 10개씩 출력, 총 글 122개, 페이지 블럭 크기: 10개 
+      -> 총 페이지수 12.2개 => 13개 
+     1) 3page 글 리스트
+       startPage = 1, endPage = 10, prev= X, next=O
+     2) 10페이지 글 리스트
+       startPage = 1, endPage = 10, prev= X, next=O
+     3) 11페이지 글 리스트  
+       startPage = 11, endPage = 20 -> 13, prev= O, next= X
+
+
+
+
+------------------------------------------------------------------------------------------------------------------
 
 	의존 객체 자동주입(Automatic Dependency Injection)
 	=> 스프링 설정파일(root-context.xml/servlet-context.xml) 태그를 사용해서
-	  의존 객체대상을 명시하지 않고 스프링 컨테이너가 자동으로 객체 주입해주는 것
+	  의존 객체대상을 명시하지 않고 스프링컨테이너가 자동으로 객체 주입해주는것
 	  
 	  1) @Inject : Java에서 지원하는 어노테이션 (특정 프레임워크에 비종속적)
 	  
-	  	 찾는순서
-	  	 [ 타입 -> @Qualifier -> 이름 -> 실패 ]
-	  	 
-	  	 사용범위
-	  	 멤버변수, set(), 생성자, 일반메서드
-	  	 
-	  2) @Autowired : Spring에서 지원하는 어노테이션 (스프링에서만 사용 가능)
-	  
-	     찾는순서
-	     [ 타입 -> 이름 -> @Qualifier -> 실패 ]
+	     찾는순서 
+	     [ 타입 -> @Qualifier -> 이름 -> 실패 ]
 	     
-	     사용범위
+	     사용범위 
+	     멤버변수, set(), 생성자, 일반메서드 
+	     
+	  2) @Autowired : Spring에서 지원하는 어노테이션(스프링에서만 사용가능)
+	  
+	  	 찾는순서
+	  	 [ 타입 -> 이름 -> @Qualifier -> 실패 ]   
+	  
+	     사용범위 
 	     멤버변수, set(), 생성자, 일반메서드
+	     
+	   3) @Resource : Java에서 지원하는 어노테이션 (특정 프레임워크에 비종속적)
+		
+		  찾는순서
+		  [ 이름 -> 타입 -> @Qualifier -> 실패 ] 
+		
+ 		  사용범위 
+	      멤버변수, set()
+
+
+
+		@Qualifier : 찾고자하는 객체의 정보가 동일한 경우 구분하기위한 구분값(별명)
+		
+		<bean id="sqlSession"  class="SqlSession" >
+	       <qualifier value="mysql"/>
+	       ..11111...
+		</bean>	
+
+		<bean id="sqlSession"  class="SqlSession" >
+	       <qualifier value="oracle"/>
+	       ..22222...
+		</bean>	
+		
+		@Inject 
+		@Qualifier("mysql")
+		private SqlSession sqlSession;
 
 
 
@@ -168,13 +209,4 @@ COMMENT = '게시판 정보를 저장하는 테이블';
 
 
 
-
-
-
-
-
-
-
-
-
-
+ 

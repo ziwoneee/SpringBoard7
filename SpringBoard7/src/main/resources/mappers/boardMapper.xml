@@ -4,79 +4,72 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwillbs.mapper.BoardMapper">
-
+	
 	<!-- 게시판 글쓰기 -->
 	<insert id="insertBoard">
-		insert into tbl_board (title,content,writer)
+		insert into tbl_board (title,content,writer) 
 		values(#{title},#{content},#{writer})
 	</insert>
 	
-	
-	<!-- 게시판 리스트(all) -->
+	<!-- 게시판 리스트(all)  -->
 	<select id="listALL" 
-			resultType="com.itwillbs.domain.BoardVO">
-		select * from tbl_board
+	        resultType="com.itwillbs.domain.BoardVO">
+		select * from tbl_board	
 		order by bno desc
 	</select>
 	
-	<!-- 게시판 리스트(page) -->
+	<!-- 게시판 리스트(page)  -->
 	<select id="listPage" 
-			resultType="com.itwillbs.domain.BoardVO">
-		select * from tbl_board
-		order by bno desc
+	        resultType="com.itwillbs.domain.BoardVO">
+		select * from tbl_board	
+		order by bno desc 
 		limit #{page},#{pageSize}
 	</select>
 	
-	<!-- 게시판 리스트(cri) -->
+	<!-- 게시판 리스트(cri)  -->
 	<select id="listCri" 
-			resultType="com.itwillbs.domain.BoardVO">
-		select * from tbl_board
-		order by bno desc
-		limit #{page},#{pageSize}
+	        resultType="com.itwillbs.domain.BoardVO">
+		select * from tbl_board	
+		order by bno desc 
+		limit #{pageStart},#{pageSize}
 	</select>
 	
-
+	
+	
 	<!-- 게시판 본문보기 -->
-	<select id="getBoard" resultType="BoardVO">
-		select * from tbl_board
-		where bno=#{bno}
+	<select id="getBoard" resultType="BoardVO" >
+		select * from tbl_board	
+		where bno=#{bno}	
 	</select>
-	
 	
 	<!-- 게시판 글 조회수 1증가 -->
 	<update id="increaseViewcnt">
-		update tbl_board
-		set viewcnt = viewcnt + 1
-		where bno = #{bno}
+		update tbl_board set 
+		viewcnt = viewcnt + 1 
+		where bno = #{bno}	
 	</update>
 	
-	
-	<!-- 게시판 글 수정하기 -->
-	<update id="boardUpdate">
-		update tbl_board
-		set title=#{title}, content=#{content}, writer=#{writer}
+	<!-- 게시판 글 정보 수정 -->
+	<update id="updateBoard">
+		update tbl_board set title=#{title},content=#{content},writer=#{writer} 
 		where bno = #{bno}
 	</update>
-	
 	
 	<!-- 게시판 글 정보 삭제 -->
-	<delete id="boardDelete">
-		delete from tbl_board
-		where bno = #{bno}
+	<delete id="deleteBoard">
+		delete from tbl_board 
+		where bno = #{bno}	
 	</delete>
 	
+	<!-- 게시판 글 개수 조회 -->
+	<select id="selectTotalCount" 
+	        resultType="int">
+	   select count(bno) from tbl_board
+	</select>
+	
+		
+	
 	
 
-</mapper>
 
-
-
-
-
-
-
-
-
-
-
-
+</mapper>  

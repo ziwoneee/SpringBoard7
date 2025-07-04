@@ -1,5 +1,6 @@
 package com.itwillbs.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,18 +17,18 @@ import com.itwillbs.domain.BoardVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.persistence.BoardDAO;
 
-/*root-context.xml에서 설정한 DB연결정보 테스트 */
+/* root-context.xml에서 설정한 DB연결정보 테스트 */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-	locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"}
+	locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"}	
 		)
 public class BoardDAOTest {
-	
+
 	//mylog
 	private static final Logger logger 
-		  = LoggerFactory.getLogger(BoardDAOTest.class);
-
+	      = LoggerFactory.getLogger(BoardDAOTest.class);
+	
 	@Inject
 	private DataSource ds;
 	
@@ -36,67 +37,49 @@ public class BoardDAOTest {
 	
 	//@Test
 	public void 디비연결_테스트() throws Exception {
-		logger.info(" @@@@@@ ds : " + ds);
-		logger.info(" @@@@@@ conn : " + ds.getConnection());
+		logger.info(" @@@@@@ ds :"+ds);
+		logger.info(" @@@@@@ conn : "+ds.getConnection());
 	}
 	
 	//@Test
-	public void 글쓰기_테스트() throws Exception {
+	public void 글쓰기_테스트() throws Exception{
 		BoardVO vo = new BoardVO();
 		vo.setTitle("테스트글 1");
 		vo.setWriter("관리자");
 		vo.setContent("테스트 글입니다!");
 		
-		bDAo.boardInsert(vo);
+		bDAo.boardInsert(vo);	
 	}
 	
 	// 게시판 리스트 (all) 동작테스트
 	//@Test
-	public void 게시판리스트_테스트() throws Exception {
+	public void 게시판리스트_테스트() throws Exception{
 		
 		logger.info(" 게시판리스트_테스트() 실행 ");
 		List<BoardVO> boardList 
-			= bDAo.boardListSelect();
+		    = bDAo.boardListSelect();
 		
-		logger.info("{}", boardList);
-	}
-	
-	@Test
-	public void 게시판리스트_페이징처리_테스트() throws Exception {
-		
-		// List boardList = bDAo.boardListPageSelect(0);
-		
-		// int page = 1;
-		// List boardList = bDAo.boardListPageSelect(page);
-		
-		Criteria cri = new Criteria();
-		cri.setPage(1);
-		cri.setPageSize(10);
-		
-		List boardList = bDAo.boardListCriSelect(cri);
-		
-		logger.info(" boardList : " + boardList.size());
-		logger.info("" + boardList);
+		logger.info("{}",boardList);
 	}
 	
 	//@Test
 	public void 게시판본문보기_테스트() throws Exception{
 		logger.info(" 게시판본문보기_테스트() 실행 ");
-		
-		int bno = 10;
+		int bno = 1;
 		bDAo.boardSelect(bno);
 		
 	}
 	
 	//@Test
 	public void 조회수1증가_테스트() throws Exception {
-		int bno = 2;
+		
+		int bno = 1 ;
 		bDAo.viewcntUpdate(bno);
+		
 	}
 	
-	
-	// @Test
-	public void 수정테스트() throws Exception {
+	//@Test
+	public void 수정테스트() throws Exception{
 		BoardVO vo = new BoardVO();
 		
 		vo.setBno(1);
@@ -107,21 +90,62 @@ public class BoardDAOTest {
 		bDAo.boardUpdate(vo);
 	}
 	
-	@Test
-	public void 삭제테스트() throws Exception {
+	//@Test
+	public void 글삭제_테스트() throws Exception{
 		
 		bDAo.boardDelete(12);
+		
+	}
+	
+	//@Test
+	public void 게시판리스트_페이징처리_테스트() throws Exception {
+		
+		//List boardList = bDAo.boardListPageSelect(0);
+		
+		//int page = 1;
+		//List boardList = bDAo.boardListPageSelect(page);
+		
+		Criteria cri = new Criteria();
+		cri.setPage(2);
+		cri.setPageSize(10);
+		
+		List boardList = bDAo.boardListCriSelect(cri);
+		
+		logger.info(" boardList : "+boardList.size());
+		logger.info("" + boardList);
+		
+	}
+	
+	//@Test
+	public void test() {
+		//int tmpEndPage = (int) Math.ceil(totalCount/(double)cri.getPageSize());
+		//int tmpEndPage = (totalCount/cri.getPageSize()  + (totalCount%cri.getPageSize()==0? 0:1) );
+	
+		//long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
+		
+		System.out.println((int) Math.ceil(122/(double)10)); //0.019
+		
+		//long endTime = System.currentTimeMillis();
+		long endTime = System.nanoTime();
+		
+		System.out.println("test1 : "+ (endTime - startTime));
+		
+	}
+	
+	//@Test
+	public void test2() {
+		//long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
+		
+		System.out.println(122/10  + (122%10==0? 0:1) ); //0.000
+		
+		//long endTime = System.currentTimeMillis();
+		long endTime = System.nanoTime();
+		System.out.println("test2 : "+ (endTime - startTime));
+		
 	}
 	
 	
 	
-	
 }
-
-
-
-
-
-
-
-

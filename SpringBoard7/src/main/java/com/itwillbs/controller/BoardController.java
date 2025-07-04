@@ -18,11 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.PageVO;
 import com.itwillbs.service.BoardService;
 
 // @RequestMapping(value = "/board/*")
-// => 실행하는 주소가 /board/~ 시작하는 모든 주소를
-//    해당컨트롤러가 처리하겠다 
+// =>  실행하는 주소가  /board/~ 시작하는 모든 주소를 
+//     해당컨트롤러가 처리하겠다 
 
 @Controller
 @RequestMapping(value = "/board/*")
@@ -35,30 +36,31 @@ public class BoardController {
 	@Inject
 	private BoardService bService;
 	
-	// 기능을 정의
+	
+	// 기능을 정의 
 	
 	// http://localhost:8088/controller/board/regist (x)
 	// http://localhost:8088/board/regist (o)
 	
 	// 글쓰기 (정보 입력) / GET
-	@RequestMapping(value = "/regist", method = RequestMethod.GET)
-	public void boardRegistGET() throws Exception {
+	@RequestMapping(value = "/regist",method = RequestMethod.GET)
+	public void boardRegistGET() throws Exception{
 		logger.info(" boardRegistGET() 실행 ");
 		logger.info(" /views/board/regist.jsp 페이지 이동 ");
 	}
 	
 	// 글쓰기 (정보 처리) / POST
-	@RequestMapping(value = "/regist", method = RequestMethod.POST)
+	@RequestMapping(value = "/regist",method = RequestMethod.POST)
 	public String boardRegistPOST(/* @ModelAttribute */ BoardVO vo,
-									RedirectAttributes rttr) throws Exception {
+			                       RedirectAttributes rttr) throws Exception {
 		logger.info(" boardRegistPOST() 실행 ");
 		
 		// 글쓰기 동작을 처리
 		
-		// 한글처리 인코딩 => web.xml 필터설정
-		// 1) 전달정보(파라메터)를 저장 / 제목, 내용, 이름
-		logger.info(" vo : {}", vo);
-
+		// 한글처리 인코딩 => web.xml 필터설정 
+		// 1) 전달정보(파라메터)를 저장 / 제목,내용,이름
+		logger.info(" vo : {}",vo);
+		
 		// 2) 서비스기능 -> DAO기능 -> DB에 저장
 		bService.boardRegist(vo);
 		
@@ -66,19 +68,20 @@ public class BoardController {
 		
 		rttr.addFlashAttribute("result", "createOK");
 		
-		// return "redirect:/board/listCri?data=1234";
-		// model.addAttribute("data", "1234");
-		// => 두 개의 동작이 동일함 (주소줄로 전달, 계속해서 정보가 남아있음)
+		// return "redirect:/board/listALL?data=1234";
+		// model.addAttribute("data","1234");
+		// => 두개의 동작이 동일함 (주소줄로 전달, 계속해서 정보가 남아있음)
 		
+		//return "redirect:/board/listALL";
 		return "redirect:/board/listCri";
 	}
 	
+	
 	// http://localhost:8088/board/listALL
 	// 게시판 리스트 (ALL)
-	// @RequestMapping(value = "/listALL", method = RequestMethod.GET)
-	public void boardListAllGET(Model model,
-								HttpSession session) throws Exception {
-		logger.info(" boardListAllGET() 실행 ");
+	//@RequestMapping(value = "/listALL",method = RequestMethod.GET)
+	public void boardListAllGET(Model model,HttpSession session) throws Exception {
+		logger.info(" boardListAllGET() 실행");
 		
 		// 서비스 -> DAO 호출 -> DB 조회
 		List<BoardVO> boardList = bService.boardListAll();
@@ -89,25 +92,26 @@ public class BoardController {
 		// 컨트롤러 -> 뷰페이지로 전달 (Model)
 		model.addAttribute("boardList", boardList);
 		
-		logger.info(" /views/board/listCri.jsp 페이지 연결");
+		logger.info(" /views/board/listALL.jsp 페이지 연결");
 	}
 	
-	// http://localhost:8088/board/listCri	기본값 호출(1,10)
-	// http://localhost:8088/board/listCri?page=2
-	// http://localhost:8088/board/listCri?pageSize=20
-	// http://localhost:8088/board/listCri?page=2&pageSize=20
+	// http://localhost:8088/board/listCri  기본값 호출(1,10)
+	// http://localhost:8088/board/listCri?page=2  
+	// http://localhost:8088/board/listCri?pageSize=20  
+	// http://localhost:8088/board/listCri?page=2&pageSize=30  
+	
+	
 	// 게시판 리스트 (Cri)
-	@RequestMapping(value = "/listCri", method = RequestMethod.GET)
-	public void boardListCriGET(Model model,
-			HttpSession session,
-			Criteria cri) throws Exception {
-		logger.info(" boardListCriGET() 실행 ");
+	@RequestMapping(value = "/listCri",method = RequestMethod.GET)
+	public void boardListCriGET(Model model,HttpSession session,
+			                     Criteria cri) throws Exception {
+		logger.info(" boardListCriGET() 실행");
 		
 		// 서비스 -> DAO 호출 -> DB 조회
-		// List<BoardVO> boardList = bService.boardListAll();
-		// Criteria cri = new Criteria();
-		// cri.setPage(1);
-		// cri.setPageSize(10);
+		//List<BoardVO> boardList = bService.boardListAll();
+//		Criteria cri = new Criteria();
+//		cri.setPage(1);
+//		cri.setPageSize(10);
 		
 		List<BoardVO> boardList = bService.boardListCri(cri);
 		
@@ -117,76 +121,90 @@ public class BoardController {
 		// 컨트롤러 -> 뷰페이지로 전달 (Model)
 		model.addAttribute("boardList", boardList);
 		
-		logger.info(" /views/board/listCri.jsp 페이지 연결");
+		// 페이징블럭(페이지 하단블럭) 정보저장하는 객체
+		PageVO pageVO = new PageVO();
+		pageVO.setCri(cri); //page , pageSize
+		
+		// 서비스 기능 -> 저장된 글의 개수를 가져오는 기능
+		//pageVO.setTotalCount(1062);
+		pageVO.setTotalCount(bService.getTotalCount());
+		
+//		int cnt = bService.getTotalCount();
+//		pageVO.setTotalCount(cnt);
+		
+		logger.info("pageVO : "+pageVO);
+		model.addAttribute("pageVO", pageVO);
+		
+		
+		
+		logger.info(" /views/board/listALL.jsp 페이지 연결");
 	}
 	
 	
-	// http://localhost:8088/board/read?bno=8
-	// 게시판 본문보기 /board/read		GET
-	// @RequestMapping(value = "/read", method = RequestMethod.GET)
+	// http://localhost:8088/board/read?bno=11
+	// 게시판 본문보기 /board/read   GET
+	//@RequestMapping(value = "/read",method = RequestMethod.GET)
 	@GetMapping(value = "/read")
 	public void boardReadGET(@RequestParam("bno") int bno,
-							 Model model,
-							 HttpSession session) throws Exception {
-		logger.info(" boardReadGET() 실행");
+			                 Model model,
+			                 @ModelAttribute("cri") Criteria cri,
+			                 HttpSession session) throws Exception{
+		logger.info(" boardReadGET() 실행 ");
 		
-		logger.info(" bno : {}", bno);
+		logger.info(" bno : {}",bno);
+		logger.info(" cri : {}",cri);
 		
-		boolean updateCheck = (boolean) session.getAttribute("updateCheck");
+		boolean updateCheck = (boolean)session.getAttribute("updateCheck");
 		
 		if(updateCheck) {
-			// 서비스 -> DAO 특정 글의 조회수를 1 증가 
+			// 서비스 -> DAO  특정 글의 조회수를 1증가
 			bService.increaseViewcnt(bno);
 			session.setAttribute("updateCheck", false);
-			
 		}
 		
-		
-		
-		// 특정 글정보를 DB에서 가져와서 view 페이지에 출력
-		// 서비스 -> DAO 특정 글정보 가져오기
+		// 특정 글정보(bno)를 DB에서 가져와서 view 페이지에 출력
+		// 서비스 -> DAO  특정 글정보 가져오기
 		BoardVO resultVO = bService.getBoard(bno);
-		logger.info(" resultVO : {} ", resultVO);
-		
+		logger.info(" resultVO : {}",resultVO);
 		// Model 객체 사용
-		model.addAttribute(resultVO); 
-		// 전달하는 타입의 클래스명을 첫글자 소문자로 바꿔서 이름으로 사용
-		// model.addAttribute("resultVO", resultVO);
+		model.addAttribute(resultVO);
+        // 전달하는 타입의 클래스명을 첫글자 소문자로 바꿔서 이름으로 사용
+		//model.addAttribute("resultVO",resultVO);
+		//model.addAttribute("a",resultVO);
 		
 		// 연결된 뷰페이지에 /board/read.jsp 출력
 		logger.info(" /board/read.jsp 페이지 연결 ");
-		
-		
 	}
 	
-	// http://localhost:8088/board/modify?bno=13
-	// 게시판 수정하기 GET
-	@RequestMapping(value="/modify", method = RequestMethod.GET)
+	// http://localhost:8088/board/modify?bno=11
+	// 게시판 수정하기 GET  
+	@RequestMapping(value = "/modify",method = RequestMethod.GET)
 	public void boardModifyGET(@ModelAttribute("bno") int bno,
-								Model model) throws Exception {
+			@ModelAttribute("cri") Criteria cri,
+			Model model) throws Exception {
 		logger.info(" boardModifyGET() 실행 ");
 		// 전달된 정보(파라메터)를 저장
-		logger.info(" bno : {}", bno);
+		logger.info(" bno : {}",bno);
 		
 		// 기존에 작성된 글의 내용을 확인하는 동작
-		
-		// 서비스 -> DAO 호출 글 정보를 가져오기
+		// 서비스 -> DAO 호출  글정보를 가져오기
 		//BoardVO resultVO = bService.getBoard(bno);
 		//model.addAttribute(resultVO);
 		
 		model.addAttribute(bService.getBoard(bno));
 		
-		// 연결된 뷰페이지에 출력(/board/modify.jsp
+		// 연결된 뷰페이지에 출력(/board/modify.jsp)
 	}
 	
-	// 게시판 수정하기 POST
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	// 게시판 수정하기 POST 
+	@RequestMapping(value = "/modify",method = RequestMethod.POST)
 	public String boardModifyPOST(BoardVO vo,
-								RedirectAttributes rttr) throws Exception {
-		logger.info(" boardModifyPOST() 실행 ");
+								@ModelAttribute("cri") Criteria cri ,
+			                  RedirectAttributes rttr) throws Exception{
+		logger.info(" boardModifyPOST() 실행 ");	
 		
 		// 수정할 정보(전달된 데이터, 파라메터) 저장
-		logger.info(" vo : {}", vo);
+		logger.info(" vo : {}",vo);
 		
 		// 서비스 -> DB에 정보 호출
 		bService.modifyBoard(vo);
@@ -194,53 +212,38 @@ public class BoardController {
 		
 		// 리스트에 수정 완료했다는 정보를 전달해서
 		// 화면에 alert 출력
-		
 		rttr.addFlashAttribute("result", "modifyOK");
-
-		// 페이지 이동
 		
-		return "redirect:/board/listCri";
+		// 페이지 이동	(리스트)	
+		
+		//return "redirect:/board/listALL";
+		//return "redirect:/board/listCri";
+		return "redirect:/board/listCri?page="+cri.getPage()+"&pageSize="+cri.getPageSize();
 	}
 	
 	// http://localhost:8088/board/remove (POST)
-	// 게시판 삭제하기 POST
-	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public String boardRemovePOST(@ModelAttribute("bno") int bno,
-								 RedirectAttributes rttr) throws Exception {
-		logger.info(" boardRemovePOST() 실행 ");
+	// 게시판 글삭제
+	@RequestMapping(value = "/remove",method = RequestMethod.POST)
+	public String boardRemovePOST(/* @ModelAttribute */ int bno,
+								  @ModelAttribute("cri") Criteria cri,
+			                      RedirectAttributes rttr  ) throws Exception{
+		logger.info(" boardRemovePOST() 실행 ! ");
 		
-		// 수정할 정보(전달된 데이터, 파라메터) 저장
-		logger.info(" bno : {}" + bno);
+		// 전달된 파라메터(bno) 저장
+		logger.info(" bno : "+bno);
 		
-		// 서비스 -> DB에 정보 호출
+		// 서비스 -> DAO 호출 게시판 글 삭제를 수행 동작
 		bService.removeBoard(bno);
-		logger.info(" 게시판 글 삭제 완료! ");
-		
-		// 리스트에 수정 완료했다는 정보를 전달해서
-		// 화면에 alert 출력
-		
-		rttr.addFlashAttribute("result", "deleteOK");
 
-		// 페이지 이동
+		rttr.addFlashAttribute("result", "deleteOK");
+		// 리스트 페이지로 이동
 		
-		return "redirect:/board/listCri";
+		//return "redirect:/board/listALL";
+		//return "redirect:/board/listCri";
+		return "redirect:/board/listCri?page="+cri.getPage()+"&pageSize="+cri.getPageSize();
 	}
-	
 	
 	
 	
 	
 } // BoardController
-
-
-
-
-
-
-
-
-
-
-
-
-
